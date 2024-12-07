@@ -10,7 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 5004; // Change the port number here
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://your-deployed-frontend-url.vercel.app', // Replace with your actual frontend URL
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 // Connect Database
