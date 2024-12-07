@@ -1,7 +1,6 @@
-// routes/employees.js
 const express = require('express');
 const router = express.Router();
-const Employee = require('../models/Employee');
+const Employee = require('../models/Employee'); // Import the Employee model
 
 // Get all employees
 router.get('/', async (req, res) => {
@@ -15,7 +14,12 @@ router.get('/', async (req, res) => {
 
 // Add a new employee
 router.post('/', async (req, res) => {
-    const employee = new Employee(req.body);
+    const employee = new Employee({
+        name: req.body.name,
+        position: req.body.position,
+        department: req.body.department
+    });
+
     try {
         const newEmployee = await employee.save();
         res.status(201).json(newEmployee);
@@ -27,7 +31,16 @@ router.post('/', async (req, res) => {
 // Update an employee
 router.put('/:id', async (req, res) => {
     try {
-        const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const employee = await Employee.findById(req.params.id);
+        if (!employee) {
+            return res.status(404).json({ message: 'Employee not found' });
+        }
+
+        employee.name = req.body.name;
+        employee.position = req.body.position;
+        employee.department = req.body.department;
+
+        const updatedEmployee = await employee.save();
         res.json(updatedEmployee);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -37,7 +50,12 @@ router.put('/:id', async (req, res) => {
 // Delete an employee
 router.delete('/:id', async (req, res) => {
     try {
-        await Employee.findByIdAndDelete(req.params.id);
+        const employee = await Employee.findById(req.params.id);
+        if (!employee) {
+            return res.status(404).json({ message: 'Employee not found' });
+        }
+
+        await employee.remove();
         res.json({ message: 'Employee deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
