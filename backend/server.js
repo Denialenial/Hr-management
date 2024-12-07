@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5004; // Change the port number here
 
 // Middleware
 app.use(cors({
-  origin: 'https://hr-managementboth-hc7zocaee-motebang-tatolos-projects.vercel.app', // Replace with your actual frontend URL
+  origin: 'https://hr-managementboth-8sm9tfnme-motebang-tatolos-projects.vercel.app', // Replace with your actual frontend URL
   methods: 'GET,POST,PUT,DELETE',
   credentials: true
 }));
