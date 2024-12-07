@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || 'https://hr-managementb.vercel.app'; // Use environment variable or default to deployed backend URL
 
 export const getVehicles = async () => {
     try {
