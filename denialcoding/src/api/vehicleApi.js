@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5003';
+const API_URL = 'https://hr-managementbackend-9i0fea9y3-motebang-tatolos-projects.vercel.app';
 
 export const getVehicles = async () => {
     try {
