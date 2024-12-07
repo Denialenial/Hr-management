@@ -10,16 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 5003; // Change the port number here
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 app.use(bodyParser.json());
 
 // Connect Database
 connectDB();
-
-// Root Route
-app.get('/', (req, res) => {
-  res.send('Welcome to the API');
-});
 
 // Routes
 app.use('/employees', employeeRoutes);
