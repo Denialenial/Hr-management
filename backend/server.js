@@ -16,6 +16,11 @@ app.use(bodyParser.json());
 // Connect Database
 connectDB();
 
+// Root Route
+app.get('/', (req, res) => {
+  res.send('Welcome to the API');
+});
+
 // Routes
 app.use('/employees', employeeRoutes);
 app.use('/vehicles', vehicleRoutes);
